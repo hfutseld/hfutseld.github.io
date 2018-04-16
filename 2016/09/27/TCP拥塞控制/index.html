@@ -1,51 +1,48 @@
-extends base
-
-block title
-  title= page.title + ' | ' + config.title
-
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-    if theme.duoshuo
-      a.ds-thread-count(data-thread-key=page.path, href=url_for(page.path) + '#comments')
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content)
-    .post-content
-      != page.content
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url='#{page.permalink}', data-id='#{page._id}')= __('shareto')
-    include _partial/tag
-    include _partial/post_nav
-    if theme.duoshuo
-      div(class='ds-share flat' data-thread-key=page.path, data-title=page.title, data-url=page.permalink)
-         .ds-share-inline
-            ul.ds-share-icons-16
-              li(data-toggle='ds-share-icons-more')
-                a(class='ds-more' href='javascript:void(0);') 分享到：
-              li
-                a(class='ds-weibo' href='javascript:void(0);' data-service='weibo') 微博
-              li
-                a(class='ds-qzone' href='javascript:void(0);' data-service='qzone') QQ空间
-              li
-                a(class='ds-qqt' href='javascript:void(0);' data-service='qqt') 腾讯微博
-              li
-                a(class='ds-wechat' href='javascript:void(0);' data-service='wechat') 微信
-            .ds-share-icons-more
-    include _partial/comments
+<!DOCTYPE html><html lang="null"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>TCP拥塞控制 | JustforFun</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/5.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">TCP拥塞控制</h1><a id="logo" href="/.">JustforFun</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa icon-home"> Start</i></a><a href="/archives/"><i class="fa icon-archive"> Archiv</i></a><a href="/about/"><i class="fa icon-about"> Über</i></a><a href="/atom.xml"><i class="fa icon-rss"> RSS</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">TCP拥塞控制</h1><div class="post-meta">Sep 27, 2016<span> | </span><span class="category"><a href="/categories/TCP/">TCP</a></span></div><a data-thread-key="2016/09/27/TCP拥塞控制/" href="/2016/09/27/TCP拥塞控制/#comments" class="ds-thread-count"></a><div class="post-content"><p>当路由器上的队列增长到很大时，网络层检测到拥塞，并试图通过丢弃数据包来管理拥塞。传输层接收到从网络层反馈过来的拥塞信息，并减慢它发送到网络的流量速率。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><!-- toc -->
+<h2 id="拥塞窗口"><a href="#拥塞窗口" class="headerlink" title="拥塞窗口"></a>拥塞窗口</h2><p>TCP维持一个拥塞窗口，通过使用基于AIMD（加法递增乘法递减）控制法来相应从网络传来的二进制拥塞信号（把丢包当成这个二进制信号）。窗口大小是任何时候发送端可以往网络发送的字节数，相应的速率大小是窗口大小除以连接的往返时间。</p>
+<p>除了维护一个拥塞窗口外，还有一个在<a href="http://hfutseld.github.io/2016/09/21/TCPvsUDP/">TCPvsUDP</a>中提到过的通告窗口也就是流量控制窗口，该窗口指出了接收端可以缓冲的字节数。要并发跟踪这两个窗口，能发送的字节数是两个窗口中较小的那个。因此有效窗口是发送端认为的应该大小和接收端认为的应该大小的较小者。</p>
+<ul>
+<li>如果拥塞窗口或流量控制窗口暂时已满，则TCP将停止发送数据。</li>
+<li>如果接收端说“发送64KB数据”，但发送端知道超过32KB的突发将阻塞网络，它就只发送32KB；另一方面，如果接收端说“发送64KB数据”，发送端知道高达128KB的突发通过网络都毫不费力，它会发送要求的全部64KB。</li>
+</ul>
+<h2 id="拥塞控制的算法"><a href="#拥塞控制的算法" class="headerlink" title="拥塞控制的算法"></a>拥塞控制的算法</h2><p>拥塞控制算法的思想是避免拥塞，而不是控制拥塞。</p>
+<h3 id="慢速启动"><a href="#慢速启动" class="headerlink" title="慢速启动"></a>慢速启动</h3><p>当建立连接时，发送端用一个很小的值初始化拥塞窗口，最多不超过4个段，然后发送端发送该初始窗口大小的数据。数据包必须经过一个往返时间才被确认。对于每个重传计时器超时前得到承认的段，发送端的拥塞窗口增加一个段的字节量。此外，随着该段获得确认，现在网络中又少了一段。结果是每个被确认的段允许发送两个段，每经过一个往返时间拥塞窗口增加一倍。见下图：(cwnd线性增长)</p>
+<img src="http://odwu0ht91.bkt.clouddn.com/images/cwnd线性增长.jpg">
+<p>由于慢速启动导致拥塞窗口按指数增长，最终（很快而不是很晚）它将太多的数据包以太快的速度发到网络，当发生这种情况时，网络中将很快建立起队列。当队列满时，一个或多个包会被丢弃。为了保持对慢速启动的控制，发送端为每个连接维持一个 <strong>慢启动阈值</strong>（slow start threshold） 。每当检测到丢包，比如超时了，慢启动阈值就被设置为当前拥塞窗口的一般，整个过程再重新启动。基本思想是当前窗口太大，因为它在过去造成了拥塞，所以现在才检测到超时。</p>
+<p>一旦慢速启动超过了阈值，TCP就从慢速启动切换到线性增加（加法递增）。在这种模式下，每个往返时间拥塞窗口只增加一段。</p>
+<h3 id="快速重传"><a href="#快速重传" class="headerlink" title="快速重传"></a>快速重传</h3><p>发送端有一个快速方法来识别它的包已经被丢失。当丢失数据包的后续数据包到达接收端时，它们触发给发送端返回确认。这些确认段携带着相同的确认号，称为重复确认。TCP假设三个重复确认意味着已经丢失一个包。丢失包的序号可以从确认号推断出来，它是整个数据序列中紧接着的下一个数据包。因此，这个包可以被立即重传，在其计时器超时前就重新发送出去。见下图：（快速重传）</p>
+<img src="http://odwu0ht91.bkt.clouddn.com/images/FASTIncast.png">
+<p><strong>重传后</strong>，慢启动阈值被设置为当前拥塞窗口的一半，就像发生了超时一样。如果在一个往返时间内确认了该重传的数据包以及丢包之前已发出的所有数据，则重新开始慢启动过程，在到达阈值之前窗口大小指数增长，到达阈值时开始线性增长。见下图：(TCP Tahoe的慢速启动后面接着线性递增)</p>
+<img src="http://odwu0ht91.bkt.clouddn.com/images/TCPTahoe1.GIF">
+<h3 id="快速恢复"><a href="#快速恢复" class="headerlink" title="快速恢复"></a>快速恢复</h3><p>快速恢复算法是在快速重传算法后添加的，当收到3个重复确认时，TCP最后进入的不是拥塞避免阶段，而是快速恢复阶段。快速恢复的思想是“数据包守恒”原则，即同一时刻在网络中的数据包数量是恒定的，只有当“老”数据包离开网络后，才能向网络中发送一个“新”的数据包。如果发送方收到一个重复确认，就表明有一个数据包离开了网络，于是cwnd加1。</p>
+<p>具体来说快速恢复的主要步骤是：</p>
+<ul>
+<li>当收到3个重复确认时，把ssthreshold设置为cwnd的一半，把cwnd设置为ssthreshold的值加3，然后重传丢失的报文段。（加3是因为收到三个重复确认，表明有个3个“老”的数据包离开了网络）。</li>
+<li>再收到重复确认时，cwnd加1。（此时还没收到丢包的那个确认，所以收到后面的包都会发送重复确认）</li>
+<li><p>快速重传之后的一个往返时间后，丢失的包将被确认。在这个时间点，重复确认将停止，快速恢复模式就此退出。拥塞窗口将被设置到新的慢启动阈值，并开始按线性增长。</p>
+<p>TCP Reno的快速恢复模式和锯齿模式：</p>
+</li>
+</ul>
+<img src="http://odwu0ht91.bkt.clouddn.com/images/TCPReno1.png">
+<h3 id="New-Reno"><a href="#New-Reno" class="headerlink" title="New Reno"></a>New Reno</h3><p>TCP的许多复杂性来自于从一个重复确认流中推断出已经到达和已经丢失的数据包，累计确认号无法提供这种确切的信息。一个简单的解决方法是使用<strong>选择确认</strong>（SACK，Selective ACKnowledgement），该确认列出了3个已接收的字节范围。有了这个信息，发送端在实现拥塞窗口时可以直接确定哪些数据包需要重传，并跟踪那些还在途中的数据包。</p>
+<p>SACK是严格意义上的咨询信息，实际上使用重复确认来检查丢包和调整拥塞窗口还是像以前一样。然而，有了SACK，TCP可以更加容易地从同时丢失多个包的情况下恢复过来，因为TCP发送端知道哪些数据包尚未收到。</p>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>除了用丢包作为拥塞信号外，<strong>显式拥塞通知</strong>（ECN，Explicit Congestion Notification）也用来作拥塞信号使用。ECN是IP层的机制，主要用来通知主机发生了拥塞。</p>
+<p>当发送端和接收端在建立连接过程中设置了ECE和CWR标志位，双方均表示他们能够使用这些标志位后，该TCP连接就可以启用ECN信号。支持ECN的路由器在接近拥塞时就会在携带ECN标志的数据包上设置拥塞信号，而不是在拥塞发生后丢弃这些数据包。</p>
+<p>如果到达的任何数据包携带了ECN拥塞信号，则会告知TCP接收端。然后接收端使用ECE标志位给TCP发送端发送通知，告知它的数据包经历了拥塞。发送端通过拥塞窗口减少（CWR）标志位告诉接收端它已经收到拥塞信号了。</p>
+<p>TCP发送端收到这些拥塞通知消息的反应和它根据重复确认检测到丢包的处理方式完全相同。严格来说这种情况更好，拥塞已经被检测出来了，而且没有包收到任何方式的损害。</p>
+</div><div class="tags"><a href="/tags/TCP/">TCP</a><a href="/tags/网络，拥塞控制/">网络，拥塞控制</a></div><div class="post-nav"><a href="/2017/01/25/Java-GC/" class="pre">Java-GC</a><a href="/2016/09/23/JavaMemory/" class="next">JVM Memory</a></div><div data-thread-key="2016/09/27/TCP拥塞控制/" data-title="TCP拥塞控制" data-url="http://hfutseld.github.io/2016/09/27/TCP拥塞控制/" class="ds-share flat"><div class="ds-share-inline"><ul class="ds-share-icons-16"><li data-toggle="ds-share-icons-more"><a href="javascript:void(0);" class="ds-more">分享到：</a></li><li><a href="javascript:void(0);" data-service="weibo" class="ds-weibo">微博</a></li><li><a href="javascript:void(0);" data-service="qzone" class="ds-qzone">QQ空间</a></li><li><a href="javascript:void(0);" data-service="qqt" class="ds-qqt">腾讯微博</a></li><li><a href="javascript:void(0);" data-service="wechat" class="ds-wechat">微信</a></li></ul><div class="ds-share-icons-more"></div></div></div><div data-thread-key="2016/09/27/TCP拥塞控制/" data-title="TCP拥塞控制" data-url="http://hfutseld.github.io/2016/09/27/TCP拥塞控制/" data-author-key="1" class="ds-thread"></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://hfutseld.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Kategorien</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TCP/">TCP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TCP-UDP/">TCP UDP</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/TCP/" style="font-size: 15px;">TCP</a> <a href="/tags/JVM/" style="font-size: 15px;">JVM</a> <a href="/tags/GC/" style="font-size: 15px;">GC</a> <a href="/tags/Memory/" style="font-size: 15px;">Memory</a> <a href="/tags/Servlet-Filter-Listener-Interceptor/" style="font-size: 15px;">Servlet Filter Listener Interceptor</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/UDP/" style="font-size: 15px;">UDP</a> <a href="/tags/计算机网络/" style="font-size: 15px;">计算机网络</a> <a href="/tags/网络，拥塞控制/" style="font-size: 15px;">网络，拥塞控制</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a> <a href="/tags/JavaEE-Tomcat/" style="font-size: 15px;">JavaEE Tomcat</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Letzte</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/Java-GC/">Java-GC</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/TCP拥塞控制/">TCP拥塞控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/JavaMemory/">JVM Memory</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/TCPvsUDP/">TCPvsUDP</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/24/TipsOfJava/">TipsOfJava</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/17/Servlet-Filter-Listener-Interceptor/">Servlet/Filter/Listener/Interceptor</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/01/Tomcat/">Tomcat原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/23/MyBlog/">Hello MyBlog</a></li></ul></div><div class="widget"><div class="comments-title"><i class="fa fa-comment-o"> Letzte Kommentare</i></div><div data-num-items="5" data-show-avatars="0" data-show-time="1" data-show-admin="0" data-excerpt-length="32" data-show-title="1" class="ds-recent-comments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Blogroll</i></div><ul></ul><a href="http://www.github.com/hfutseld/" title="Github" target="_blank">Github</a><ul></ul><a href="http://www.coolshell.cn/" title="酷壳" target="_blank">酷壳</a><ul></ul><a href="http://www.liaoxuefeng.com/" title="廖雪峰的官方网站" target="_blank">廖雪峰的官方网站</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">JustforFun.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script>var duoshuoQuery = {short_name:'hfutseld'};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-73892746-1','auto');ga('send','pageview');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
