@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hfutseld.github.io/"/>
-  <updated>2017-01-25T03:54:22.000Z</updated>
+  <updated>2018-04-23T14:51:10.079Z</updated>
   <id>http://hfutseld.github.io/</id>
   
   <author>
@@ -20,11 +20,10 @@
     <link href="http://hfutseld.github.io/2017/01/25/Java-GC/"/>
     <id>http://hfutseld.github.io/2017/01/25/Java-GC/</id>
     <published>2017-01-25T11:09:11.000Z</published>
-    <updated>2017-01-25T03:54:22.000Z</updated>
+    <updated>2018-04-23T14:51:10.079Z</updated>
     
     <content type="html"><![CDATA[<p>对于Java的垃圾回收，主要体现在三个问题上：When，What，How。GC是在什么时候，对什么东西，做了什么事情。</p>
 <p>对于Java内存运行时区域的各个部分，其中程序计数器、虚拟机栈、本地方法栈三个区域随线程而生，随线程而灭：栈中的栈帧随着方法的进入和退出而有条不紊地执行着出栈和入栈操作。每一个栈帧中分配多少内存基本上是在类结构确定下来时就已知的（尽管在运行期会由JIT编译器进行一些优化）因此在这几个区域内就不需要过多考虑回收的问题，因为方法结束或者线程结束时，内存自然就跟随着回收了。而Java堆和方法区则不一样，一个接口中的多个实现类需要的内存可能不一样，一个方法中的多个分支需要的内存也可能不一样，我们只有在程序处于运行期间才能知道会创建哪些对象，这部分的内存的分配和回收都是动态的，GC所关注的是这部分内存。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><!-- toc -->
 <h2 id="When"><a href="#When" class="headerlink" title="When"></a><strong>When</strong></h2><p>大多数情况下，对象在新生代Eden区中分配，当Eden区没有足够空间进行分配时，虚拟机将发起一次Minor GC。</p>
 <p> PS: Minor GC和Full GC的区别</p>
 <ul>
@@ -108,10 +107,9 @@
     <link href="http://hfutseld.github.io/2016/09/27/TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/"/>
     <id>http://hfutseld.github.io/2016/09/27/TCP拥塞控制/</id>
     <published>2016-09-27T00:11:10.000Z</published>
-    <updated>2017-01-25T03:54:22.000Z</updated>
+    <updated>2018-04-23T14:51:34.911Z</updated>
     
     <content type="html"><![CDATA[<p>当路由器上的队列增长到很大时，网络层检测到拥塞，并试图通过丢弃数据包来管理拥塞。传输层接收到从网络层反馈过来的拥塞信息，并减慢它发送到网络的流量速率。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><!-- toc -->
 <h2 id="拥塞窗口"><a href="#拥塞窗口" class="headerlink" title="拥塞窗口"></a>拥塞窗口</h2><p>TCP维持一个拥塞窗口，通过使用基于AIMD（加法递增乘法递减）控制法来相应从网络传来的二进制拥塞信号（把丢包当成这个二进制信号）。窗口大小是任何时候发送端可以往网络发送的字节数，相应的速率大小是窗口大小除以连接的往返时间。</p>
 <p>除了维护一个拥塞窗口外，还有一个在<a href="http://hfutseld.github.io/2016/09/21/TCPvsUDP/">TCPvsUDP</a>中提到过的通告窗口也就是流量控制窗口，该窗口指出了接收端可以缓冲的字节数。要并发跟踪这两个窗口，能发送的字节数是两个窗口中较小的那个。因此有效窗口是发送端认为的应该大小和接收端认为的应该大小的较小者。</p>
 <ul>
@@ -148,7 +146,7 @@
     <summary type="html">
     
       &lt;p&gt;当路由器上的队列增长到很大时，网络层检测到拥塞，并试图通过丢弃数据包来管理拥塞。传输层接收到从网络层反馈过来的拥塞信息，并减慢它发送到网络的流量速率。&lt;/p&gt;
-&lt;h1 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&quot;目录&quot;&gt;&lt;
+&lt;h2 id=&quot;拥塞窗口&quot;&gt;&lt;a href=&quot;#拥塞窗口&quot; class=&quot;headerlink&quot; title=&quot;拥
     
     </summary>
     
@@ -166,10 +164,9 @@
     <link href="http://hfutseld.github.io/2016/09/23/JavaMemory/"/>
     <id>http://hfutseld.github.io/2016/09/23/JavaMemory/</id>
     <published>2016-09-22T22:32:40.000Z</published>
-    <updated>2017-01-25T03:54:22.000Z</updated>
+    <updated>2018-04-23T14:50:53.016Z</updated>
     
     <content type="html"><![CDATA[<p>Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人却想出来。<br>                                             —-摘自《深入理解Java虚拟机》</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><!-- toc -->
 <h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。Java虚拟机所管理的内存将会包括以下几个运行时数据区域：方法区、堆、虚拟机栈、本地方法栈、程序计数器。其中方法区和堆是由所有线程共享的数据区，后三个是线程隔离的数据区。</p>
 <img title="JVM内存模型" src="http://odwu0ht91.bkt.clouddn.com/images/jvm-memory-model.JPG">
 <h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器是一块较小的内存空间，他可以看作是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型里，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。<br>由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）都只会执行一条线程中的指令，因此每条线程都需要一个独立的程序计数器，各条线程之间计数器互不影响，独立存储，我们称这类区域为“线程私有”的内存。</p>
@@ -203,7 +200,7 @@
     <summary type="html">
     
       &lt;p&gt;Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人却想出来。&lt;br&gt;                                             —-摘自《深入理解Java虚拟机》&lt;/p&gt;
-&lt;h1 id=&quot;目录&quot;
+&lt;h2 id=&quot;运行时
     
     </summary>
     
@@ -221,10 +218,9 @@
     <link href="http://hfutseld.github.io/2016/09/22/TCPvsUDP/"/>
     <id>http://hfutseld.github.io/2016/09/22/TCPvsUDP/</id>
     <published>2016-09-21T23:39:20.000Z</published>
-    <updated>2017-01-25T03:54:22.000Z</updated>
+    <updated>2018-04-23T14:51:46.135Z</updated>
     
     <content type="html"><![CDATA[<p>UDP是一个简单的、不可靠的数据报协议，而TCP是一个复杂的、可靠的字节流协议。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><!-- toc -->
 <h2 id="用户数据报协议-UDP"><a href="#用户数据报协议-UDP" class="headerlink" title="用户数据报协议 UDP"></a>用户数据报协议 UDP</h2><p>UDP是一个简单的传输层协议，应用进程往一个UDP套接字写入一个消息，该消息随后被封装到一个UDP数据报，该UDP数据报进而又被封装到一个IP数据报，然后发送到目的地。UDP不保证UDP数据报会到达其最终目的地，不保证各个数据报的先后顺序跨网络后保持不变，也不保证每个数据报只到达一次。</p>
 <ul>
 <li>缺乏可靠性：<br>如果一个数据报到达了其最终目的地，但是校验和检测发现有错误，或者该数据报在网络传输途中被丢弃了，它就无法被投递给UDP套接字，也不会被源端自动重传。（如果想要确保一个数据报到达其目的地，可以往应用程序中添置一大堆的特性：来自对端的确认、本端的超时与重传等。）</li>
@@ -261,8 +257,7 @@
     <summary type="html">
     
       &lt;p&gt;UDP是一个简单的、不可靠的数据报协议，而TCP是一个复杂的、可靠的字节流协议。&lt;/p&gt;
-&lt;h1 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&quot;目录&quot;&gt;&lt;/a&gt;目录&lt;/h1&gt;&lt;!-- toc --&gt;
-&lt;h2 id=&quot;用户数据
+&lt;h2 id=&quot;用户数据报协议-UDP&quot;&gt;&lt;a href=&quot;#用户数据报协议-UDP&quot; class=&quot;headerlink&quot; title=&quot;用户数据报协议 UDP&quot;&gt;&lt;/a&gt;用户数据报
     
     </summary>
     
@@ -282,26 +277,25 @@
     <link href="http://hfutseld.github.io/2016/03/24/TipsOfJava/"/>
     <id>http://hfutseld.github.io/2016/03/24/TipsOfJava/</id>
     <published>2016-03-23T22:11:57.000Z</published>
-    <updated>2017-01-25T03:54:22.000Z</updated>
+    <updated>2018-04-23T14:52:25.998Z</updated>
     
     <content type="html"><![CDATA[<p>收集了一些有关java的知识点，并持续更新相关的知识点。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><!-- toc -->
-<h2 id="1、面向对象编程的三大特性是什么？请简要阐述"><a href="#1、面向对象编程的三大特性是什么？请简要阐述" class="headerlink" title="1、面向对象编程的三大特性是什么？请简要阐述"></a>1、面向对象编程的三大特性是什么？请简要阐述</h2><p>1）继承：继承是一种联结类的层次模型，并且允许和鼓励类的重用，它提供了一种明确表述共性的方法。对象的一个新类可以从现有的类中派生，这个过程称为类继承。新类继 承了原始类的特性，新类称为原始类的派生类（子类），而原始类称为新类的基类（父类）。派生类可以从它的基类那里继承方法和实例变量，并且类可以修改或增 加新的方法使之更适合特殊的需要。 </p>
+<h2 id="面向对象编程的三大特性是什么？请简要阐述"><a href="#面向对象编程的三大特性是什么？请简要阐述" class="headerlink" title="面向对象编程的三大特性是什么？请简要阐述"></a>面向对象编程的三大特性是什么？请简要阐述</h2><p>1）继承：继承是一种联结类的层次模型，并且允许和鼓励类的重用，它提供了一种明确表述共性的方法。对象的一个新类可以从现有的类中派生，这个过程称为类继承。新类继 承了原始类的特性，新类称为原始类的派生类（子类），而原始类称为新类的基类（父类）。派生类可以从它的基类那里继承方法和实例变量，并且类可以修改或增 加新的方法使之更适合特殊的需要。 </p>
 <p>  2）封装：封装是把过程和数据包围起来，对数据的访问只能通过已定义的界面。面向对象计算始于这个基本概念，即现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象。</p>
 <p>  3）多态：多态性是指允许不同类的对象对同一消息作出响应。多态性包括参数化多态性和包含多态性。多态性语言具有灵活、抽象、行为共享、代码共享的优势，很好的解决了应用程序函数同名问题。</p>
-<h2 id="2、ArrayList-Vector-LinkedList的存储性能和特性"><a href="#2、ArrayList-Vector-LinkedList的存储性能和特性" class="headerlink" title="2、ArrayList,Vector,LinkedList的存储性能和特性"></a>2、ArrayList,Vector,LinkedList的存储性能和特性</h2><p>ArrayList和Vector都是使用数组方式存储数据，此数组元素数大于实际存储数据以便增加和插入元素，它们都允许直接按序号索引元素，但是插入元素要涉及数组元素移动等内存操作，所以索引数据快而插入数据慢，Vector由于使用了synchronized思路方法(线程安全) ，通常性能上较ArrayList差，而LinkedList使用双向链表实现存储，按序号索引数据需要进行前向或后向遍历，但是插入数据时只需要记录本项前后项即可，所以插入速度较快。</p>
-<h2 id="3、Collection-和-Collections的区别"><a href="#3、Collection-和-Collections的区别" class="headerlink" title="3、Collection 和 Collections的区别"></a>3、Collection 和 Collections的区别</h2><p>Collection是集合类的上级接口，继承于他的接口主要有Set和List.  Collections是针对集合类的一个帮助类，他提供一系列静态方法实现对各种集合的搜索、排序、线程安全化等操作。</p>
-<h2 id="4、String-和-StringBuffer的区别"><a href="#4、String-和-StringBuffer的区别" class="headerlink" title="4、String 和 StringBuffer的区别"></a>4、String 和 StringBuffer的区别</h2><p>JAVA平台提供了两个类:String和StringBuffer，它们可以储存和操作字符串，即包含多个字符的字符数据这个String类提供了数值不可改变字符串，而这个StringBuffer类提供的字符串进行修改当你知道字符数据要改变的时候你就可以使用StringBuffer，可以使用StringBuffers来动态构造字符数据。</p>
-<h2 id="5、HashMap-和-Hashtable的区别"><a href="#5、HashMap-和-Hashtable的区别" class="headerlink" title="5、HashMap 和 Hashtable的区别"></a>5、HashMap 和 Hashtable的区别</h2><p>HashMap是Hashtable的轻量级实现(非线程安全的实现)，他们都完成了Map接口，主要区别在于HashMap允许空(null)键值(key),由于非线程安全，效率上可能高于Hashtable，HashMap允许将Null作为一个entryde key 或者value,而Hashtable不允许 HashMap把Hashtable的contains思路方法去掉了，改成containsvalue和containsKey因为contains思路方法容易让人引起误解Hashtable继承自Dictionary类，而HashMap是Java1.2引进的Map interface的一个实现。</p>
+<h2 id="ArrayList-Vector-LinkedList的存储性能和特性"><a href="#ArrayList-Vector-LinkedList的存储性能和特性" class="headerlink" title="ArrayList,Vector,LinkedList的存储性能和特性"></a>ArrayList,Vector,LinkedList的存储性能和特性</h2><p>ArrayList和Vector都是使用数组方式存储数据，此数组元素数大于实际存储数据以便增加和插入元素，它们都允许直接按序号索引元素，但是插入元素要涉及数组元素移动等内存操作，所以索引数据快而插入数据慢，Vector由于使用了synchronized思路方法(线程安全) ，通常性能上较ArrayList差，而LinkedList使用双向链表实现存储，按序号索引数据需要进行前向或后向遍历，但是插入数据时只需要记录本项前后项即可，所以插入速度较快。</p>
+<h2 id="Collection-和-Collections的区别"><a href="#Collection-和-Collections的区别" class="headerlink" title="Collection 和 Collections的区别"></a>Collection 和 Collections的区别</h2><p>Collection是集合类的上级接口，继承于他的接口主要有Set和List.  Collections是针对集合类的一个帮助类，他提供一系列静态方法实现对各种集合的搜索、排序、线程安全化等操作。</p>
+<h2 id="String-和-StringBuffer的区别"><a href="#String-和-StringBuffer的区别" class="headerlink" title="String 和 StringBuffer的区别"></a>String 和 StringBuffer的区别</h2><p>JAVA平台提供了两个类:String和StringBuffer，它们可以储存和操作字符串，即包含多个字符的字符数据这个String类提供了数值不可改变字符串，而这个StringBuffer类提供的字符串进行修改当你知道字符数据要改变的时候你就可以使用StringBuffer，可以使用StringBuffers来动态构造字符数据。</p>
+<h2 id="HashMap-和-Hashtable的区别"><a href="#HashMap-和-Hashtable的区别" class="headerlink" title="HashMap 和 Hashtable的区别"></a>HashMap 和 Hashtable的区别</h2><p>HashMap是Hashtable的轻量级实现(非线程安全的实现)，他们都完成了Map接口，主要区别在于HashMap允许空(null)键值(key),由于非线程安全，效率上可能高于Hashtable，HashMap允许将Null作为一个entryde key 或者value,而Hashtable不允许 HashMap把Hashtable的contains思路方法去掉了，改成containsvalue和containsKey因为contains思路方法容易让人引起误解Hashtable继承自Dictionary类，而HashMap是Java1.2引进的Map interface的一个实现。</p>
 <p>   最大的区别是，Hashtable的思路方法是Synchronize的，而HashMap不是，在多个线程访问Hashtable时，不需要自己为它的思路方法实现同步，而HashMap 就必须为它的思路方法提供外同步。</p>
 <p>   Hshtable和HashMap采用的hash/rehash算法都大概一样，所以性能不会有很大的差异。</p>
 <p>   （有时间会总结一下java中不同的Map的区别）</p>
-<h2 id="6、final-finally-finalize的区别"><a href="#6、final-finally-finalize的区别" class="headerlink" title="6、final, finally, finalize的区别"></a>6、final, finally, finalize的区别</h2><p>1）final 用于声明属性，方法和类，分别表示属性不可变，方法不可覆盖，类不可继承。</p>
+<h2 id="final-finally-finalize的区别"><a href="#final-finally-finalize的区别" class="headerlink" title="final, finally, finalize的区别"></a>final, finally, finalize的区别</h2><p>1）final 用于声明属性，方法和类，分别表示属性不可变，方法不可覆盖，类不可继承。</p>
 <p>  2）finally是异常处理语句结构的一部分，表示总是执行。 </p>
 <p>  3）finalize是Object类的一个方法，在垃圾收集器执行的时候会调用被回收对象的此方法，可以覆盖此方法提供垃圾收集时的其他资源回收，例如关闭文件等。  </p>
-<h2 id="7、Overload-和-Override的区别。Overloaded的方法是否可以改变返回值的类型"><a href="#7、Overload-和-Override的区别。Overloaded的方法是否可以改变返回值的类型" class="headerlink" title="7、Overload 和 Override的区别。Overloaded的方法是否可以改变返回值的类型?"></a>7、Overload 和 Override的区别。Overloaded的方法是否可以改变返回值的类型?</h2><h2 id="8、为什么Java可以运行在不同的平台上？"><a href="#8、为什么Java可以运行在不同的平台上？" class="headerlink" title="8、为什么Java可以运行在不同的平台上？"></a>8、为什么Java可以运行在不同的平台上？</h2><p>Java语言的一个非常重要的特点就是与平台的无关性。而使用Java虚拟机是实现这一特点的关键。一般的高级语言如果要在不同的平台上运行，至少需要编译成不同的目标代码。而引入Java语言虚拟机后，Java语言在不同平台上运行时不需要重新编译。Java语言编译程序只需生成在Java虚拟机上运行的目标代码(字节码)，就可以在多种平台上不加修改地运行。Java虚拟机在执行字节码时，把字节码解释成具体平台上的机器指令执行。 </p>
+<h2 id="Overload-和-Override的区别。Overloaded的方法是否可以改变返回值的类型"><a href="#Overload-和-Override的区别。Overloaded的方法是否可以改变返回值的类型" class="headerlink" title="Overload 和 Override的区别。Overloaded的方法是否可以改变返回值的类型?"></a>Overload 和 Override的区别。Overloaded的方法是否可以改变返回值的类型?</h2><h2 id="为什么Java可以运行在不同的平台上？"><a href="#为什么Java可以运行在不同的平台上？" class="headerlink" title="为什么Java可以运行在不同的平台上？"></a>为什么Java可以运行在不同的平台上？</h2><p>Java语言的一个非常重要的特点就是与平台的无关性。而使用Java虚拟机是实现这一特点的关键。一般的高级语言如果要在不同的平台上运行，至少需要编译成不同的目标代码。而引入Java语言虚拟机后，Java语言在不同平台上运行时不需要重新编译。Java语言编译程序只需生成在Java虚拟机上运行的目标代码(字节码)，就可以在多种平台上不加修改地运行。Java虚拟机在执行字节码时，把字节码解释成具体平台上的机器指令执行。 </p>
 <p>为了跨平台特性，字节码是不能直接在机器上运行的，需要有一个虚拟机（JVM）来解释执行。而不同平台底层肯定不一样，所以不同平台上的JVM是不一样的。JVM就负责把通用的字节码解释成对应平台的底层代码去执行。(JVM是通过C++实现的）</p>
-<h2 id="9、Java中非静态方法能不能调用静态成员？"><a href="#9、Java中非静态方法能不能调用静态成员？" class="headerlink" title="9、Java中非静态方法能不能调用静态成员？"></a>9、Java中非静态方法能不能调用静态成员？</h2><p>不能，因为静态的方法可以在没有创建实例时使用，而申明为非静态的成员变量是一个对象属性，它只有在对象存在是引用，因此如果在对象为创建实例时我们在静态方法中调用了非静态成员自然是非法的，所以编译器会在这个时候报错。</p>
+<h2 id="Java中非静态方法能不能调用静态成员？"><a href="#Java中非静态方法能不能调用静态成员？" class="headerlink" title="Java中非静态方法能不能调用静态成员？"></a>Java中非静态方法能不能调用静态成员？</h2><p>不能，因为静态的方法可以在没有创建实例时使用，而申明为非静态的成员变量是一个对象属性，它只有在对象存在是引用，因此如果在对象为创建实例时我们在静态方法中调用了非静态成员自然是非法的，所以编译器会在这个时候报错。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">import java.util.*;</div><div class="line"></div><div class="line"></div><div class="line">class Test&#123;</div><div class="line">   	int i = 0;</div><div class="line">   	public static int main(String[] args)&#123;</div><div class="line">     		System.out.println(i);</div><div class="line">  	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面的例子编译的时候编译器会出现下面的错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Test.java:7: 错误: 无法从静态上下文中引用非静态 变量 i</div><div class="line">       System.out.println(i);</div></pre></td></tr></table></figure></p>
 ]]></content>
@@ -309,8 +303,7 @@
     <summary type="html">
     
       &lt;p&gt;收集了一些有关java的知识点，并持续更新相关的知识点。&lt;/p&gt;
-&lt;h1 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&quot;目录&quot;&gt;&lt;/a&gt;目录&lt;/h1&gt;&lt;!-- toc --&gt;
-&lt;h2 id=&quot;1、面向对象编程的三大特性是什么
+&lt;h2 id=&quot;面向对象编程的三大特性是什么？请简要阐述&quot;&gt;&lt;a href=&quot;#面向对象编程的三大特性是什么？请简要阐述&quot; class=&quot;headerlink&quot; title=&quot;面向对象编程的三大特性是什么？请
     
     </summary>
     
@@ -328,10 +321,9 @@
     <link href="http://hfutseld.github.io/2016/03/17/Servlet-Filter-Listener-Interceptor/"/>
     <id>http://hfutseld.github.io/2016/03/17/Servlet-Filter-Listener-Interceptor/</id>
     <published>2016-03-16T21:34:40.000Z</published>
-    <updated>2017-01-25T03:54:22.000Z</updated>
+    <updated>2018-04-23T14:51:23.608Z</updated>
     
     <content type="html"><![CDATA[<p>Servlet/Filter/Listener/Interceptor的区别和联系</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><!-- toc -->
 <h1 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h1><p>Servlet是一种运行服务器端的Java应用程序，具有独立于平台和协议的特性，并且可以动态的生成Web页面，他工作在客户端请求与服务器响应的中间层。Servlet的主要功能在于交互式地浏览和修改数据，生成动态Web内容：</p>
 <ol>
 <li>客户端发送请求至服务器端</li>
@@ -400,8 +392,7 @@
     <summary type="html">
     
       &lt;p&gt;Servlet/Filter/Listener/Interceptor的区别和联系&lt;/p&gt;
-&lt;h1 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&quot;目录&quot;&gt;&lt;/a&gt;目录&lt;/h1&gt;&lt;!-- toc --&gt;
-&lt;h1 id=&quot;Ser
+&lt;h1 id=&quot;Servlet&quot;&gt;&lt;a href=&quot;#Servlet&quot; class=&quot;headerlink&quot; title=&quot;Servlet&quot;&gt;&lt;/a&gt;Servlet&lt;/h1&gt;&lt;p&gt;S
     
     </summary>
     
@@ -411,48 +402,21 @@
   </entry>
   
   <entry>
-    <title>Tomcat原理</title>
-    <link href="http://hfutseld.github.io/2015/12/01/Tomcat/"/>
-    <id>http://hfutseld.github.io/2015/12/01/Tomcat/</id>
-    <published>2015-11-30T19:13:19.000Z</published>
-    <updated>2017-01-24T15:39:09.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>不知不觉已经到了大三了，又快要到人生的重要决策阶段了，其实现在说这个有点晚了，应该在大二就得决定以后的学习方向了，想了一下自己的兴趣之后决定以后从事web开发与服务方向的学习和工作，所以最近在学习JavaEE轻量级应用开发相关的知识，并且决定将自己学习的经历和知识记录下来，这篇blog介绍的是tomcat相关的知识。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><!-- toc -->
-<h1 id="Tomcat-简介"><a href="#Tomcat-简介" class="headerlink" title="Tomcat 简介"></a>Tomcat 简介</h1><p><strong>Tomcat</strong> 可以运行Servlet和JSP，是一个小型的轻量级应用服务器，是开发中小型Web应用系统的首选，它既是一个Servlet容器，又是一个独立运行的服务器。</p>
-<h2 id="Tomcat与Servlet的关系"><a href="#Tomcat与Servlet的关系" class="headerlink" title="Tomcat与Servlet的关系"></a>Tomcat与Servlet的关系</h2><p>当初在Apache开发时还未出现Servlet的概念，所以Apache不能内置支持Servlet。为了支持Servlet，出现了服务器小程序容器（Servlet Container）。运行时由Web服务器软件处理一般请求，并把Servlet调用传递给“容器”处理。Tomcat就是满足这种需要的JSP/Servlet引擎。按照工作模式的不同，Servlet容器可以分为以下三类：</p>
-<ul>
-<li><strong>独立运行的Servlet容器:</strong> 在这种模式下，Servlet容器作为构成Web服务器的一部分而存在，当使用</li>
-</ul>
-<h2 id="Tomcat层次结构"><a href="#Tomcat层次结构" class="headerlink" title="Tomcat层次结构"></a>Tomcat层次结构</h2><h2 id="Java-Web应用处理"><a href="#Java-Web应用处理" class="headerlink" title="Java Web应用处理"></a>Java Web应用处理</h2><h1 id="Tomcat安装与环境配置"><a href="#Tomcat安装与环境配置" class="headerlink" title="Tomcat安装与环境配置"></a>Tomcat安装与环境配置</h1><h1 id="Tomcat配置"><a href="#Tomcat配置" class="headerlink" title="Tomcat配置"></a>Tomcat配置</h1>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;不知不觉已经到了大三了，又快要到人生的重要决策阶段了，其实现在说这个有点晚了，应该在大二就得决定以后的学习方向了，想了一下自己的兴趣之后决定以后从事web开发与服务方向的学习和工作，所以最近在学习JavaEE轻量级应用开发相关的知识，并且决定将自己学习的经历和知识记录下来，
-    
-    </summary>
-    
-    
-      <category term="JavaEE Tomcat" scheme="http://hfutseld.github.io/tags/JavaEE-Tomcat/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Hello MyBlog</title>
     <link href="http://hfutseld.github.io/2015/09/23/MyBlog/"/>
     <id>http://hfutseld.github.io/2015/09/23/MyBlog/</id>
     <published>2015-09-22T17:14:19.000Z</published>
-    <updated>2017-01-25T03:54:22.000Z</updated>
+    <updated>2018-04-23T14:15:06.700Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
-<p>My blog –”Route Of Coding” is online, I will write something about my route of learning coding. It will be a amazing procsess.</p>
+<p>My blog –”Just for Fun” is online, I will write something about my route of learning coding. It will be a amazing procsess.</p>
 </blockquote>
 ]]></content>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;My blog –”Route Of Coding” is online, I will write something about my route of learning coding. It will be a amazing procses
+&lt;p&gt;My blog –”Just for Fun” is online, I will write something about my route of learning coding. It will be a amazing procsess.&lt;
     
     </summary>
     
