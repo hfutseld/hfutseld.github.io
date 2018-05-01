@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hfutseld.github.io/"/>
-  <updated>2018-05-01T13:11:38.126Z</updated>
+  <updated>2018-05-01T13:18:36.195Z</updated>
   <id>http://hfutseld.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://hfutseld.github.io/2017/03/14/ObserverVSSubscriber/"/>
     <id>http://hfutseld.github.io/2017/03/14/ObserverVSSubscriber/</id>
     <published>2017-03-14T10:35:22.000Z</published>
-    <updated>2018-05-01T13:11:38.126Z</updated>
+    <updated>2018-05-01T13:18:36.195Z</updated>
     
     <content type="html"><![CDATA[<h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><p>目标和观察者是基类，目标提供维护观察者的一系列方法，观察者提供更新接口。观察者和目标继承各自的基类，然后观察者实例把自己注册到目标实例里，在目标实例发生变化时候，调度观察者的更新方法。</p>
 <img src="http://odwu0ht91.bkt.clouddn.com/images/Observer.png">
