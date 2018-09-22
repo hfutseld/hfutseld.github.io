@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hfutseld.github.io/"/>
-  <updated>2018-05-31T13:45:33.435Z</updated>
+  <updated>2018-09-22T08:26:59.847Z</updated>
   <id>http://hfutseld.github.io/</id>
   
   <author>
@@ -14,6 +14,72 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Quantitative trading by Ernest P. Chan读书笔记</title>
+    <link href="http://hfutseld.github.io/2018/09/22/Quantitative%20trading%20by%20Ernest%20P.%20Chan/"/>
+    <id>http://hfutseld.github.io/2018/09/22/Quantitative trading by Ernest P. Chan/</id>
+    <published>2018-09-22T14:09:20.000Z</published>
+    <updated>2018-09-22T08:26:59.847Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="怎样去评价策略"><a href="#怎样去评价策略" class="headerlink" title="怎样去评价策略"></a>怎样去评价策略</h2><p>1、夏普率(Information Ratio Or Sharp Ratio)<br> Excess Returns = Portfolio Returns − Benchmark Returns<br> Information Ratio = Average of Excess Return / Standard Deviation of Excess Returns</p>
+<p>2、最大和最长时间回撤</p>
+<p>3、交易费用影响收益</p>
+<p>4、历史数据幸存者偏差</p>
+<p>5、Does the strategy lose steam in recent years compared to its earlier<br>years?</p>
+<p>6、Data-Snooping Bias数据透视偏差<br>If you build a trading strategy that has 100 parameters, it is very likely that you can optimize those parameters in such a way that the historical performance will look fantastic.</p>
+<p>7、策略的容量</p>
+<h2 id="避免常见的回测问题"><a href="#避免常见的回测问题" class="headerlink" title="避免常见的回测问题"></a>避免常见的回测问题</h2><p>1、Look-Ahead Bias<br>使用延迟的历史数据去计算交易机会</p>
+<p>2、Data-Snooping Bias<br>过度拟合数据</p>
+<p>3、Sample Size<br>交易时间（每年交易日的数量，每天交易小时数量、每天交易分钟数量）</p>
+<p>4、Out-of-Sample Testing<br>将历史数据分为相等的两部分，一部分作为参数优化的数据，另外一份作为回测数据。（如果数据比较少的话，至少三分之一作为回测数据）</p>
+<h2 id="资金和风控管理"><a href="#资金和风控管理" class="headerlink" title="资金和风控管理"></a>资金和风控管理</h2><h3 id="优化资金分配和杠杆"><a href="#优化资金分配和杠杆" class="headerlink" title="优化资金分配和杠杆"></a>优化资金分配和杠杆</h3><pre><code>凯利公式：在一个期望收益为正的重复性赌局或者重复性投资中，每一期应该下注的最优比例。
+假设胜的概率为p，败的概率为q=1-p，赔率为b，则每局最优下注比例为f*，这就是凯利公式：
+
+    f* = (bp - q) / b
+
+1、随着局数n的增大，按照凯利公式f*下注的资金Xn(f*)将远远超过按照任何其他比例f下注的资金Xn(f);
+2、对于任何给定的目标资金额C，以凯利公式f*下注的策略超过该资金额所需要的期望时间（即期望局数）最少。
+</code></pre><p>凯利公式在量化投资中的应用</p>
+<pre><code>将凯利公式应用于量化投资中确定投资品的最佳杠杆比例（仓位）
+</code></pre><p>第一种：将所有盈利交易的平均收益除以所有亏损交易的平均亏损作为赔率。由于每个交易的开仓、平仓时间并不固定，每次交易的持续时间都是不同的。由于时间不同，交易的风险特性完全不同。所以这种不考虑时间的赔率计算方式是有问题。</p>
+<p>第二种：利用凯利公式的思想，最大化单期对数收益率</p>
+<pre><code>假设一个投资品的单期的百分比收益率（即期末价格 / 期初价格 - 1）满足均值为 μ 、标准差为 σ 的正态分布。可以证明，在这个假设下，该投资品的单期对数收益率的期望为 μ - 0.5σ^2 。我们来看看最大化该对数收益率的杠杆率 L 是多少。
+当我们使用  L 倍的杠杆时，均值和标准差分别变为 μL 和 σL ，因此对数收益率变为 μL - 0.5(σL)^2 。以 L 为自变量来最大化 μL - 0.5(σL)^2 。对其求一阶导数并使它为 0，并检查其二阶导数有：
+
+一阶导数: μ-σ^2L=0
+二阶导数: -σ^2
+
+由一阶导数等于 0 可得最优的杠杆率为  L* = μ / σ^2 ，由于二阶导数恒小于 0，因此对数收益率在  L = L* 有最大值。因此，凯利公式确定的最优杠杆率就是：L* = μ / σ^2
+在实际使用中， μ 和 σ 难以估计，此外不同期之间的收益率也很难保证绝对独立，因此业界普遍的观点是凯利公式的理论杠杆率风险较高。为此，普遍的做法是把  L* 看作是杠杆率的上限，而使用  L*/2 的杠杆率，这称之为“half-Kelly”。投资者可根据自己愿意承担的最大风险来决定是否进一步降低杠杆率。
+</code></pre><p>凯利公式的核心是控制风险</p>
+<h2 id="统计套利策略"><a href="#统计套利策略" class="headerlink" title="统计套利策略"></a>统计套利策略</h2><p>1、均值回归和动量策略</p>
+<p>2、regime switching(体制转换模型)</p>
+<p>3、稳定性和协同性<br>两个标的物的价格有着稳定性或者协同性都可以用来价差套利</p>
+<p>4、factor models</p>
+<p>5、策略退出信号：</p>
+<ul>
+<li>持仓时间段</li>
+<li>到达目标价格或者收益区间</li>
+<li>新的进入信号（相反的交易） </li>
+<li>stop lose price</li>
+</ul>
+<p>6、seasonal trading strategy</p>
+<p>7、高频交易<br>提高sharpe ratio</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;怎样去评价策略&quot;&gt;&lt;a href=&quot;#怎样去评价策略&quot; class=&quot;headerlink&quot; title=&quot;怎样去评价策略&quot;&gt;&lt;/a&gt;怎样去评价策略&lt;/h2&gt;&lt;p&gt;1、夏普率(Information Ratio Or Sharp Ratio)&lt;br&gt; Excess
+    
+    </summary>
+    
+      <category term="Quantitative" scheme="http://hfutseld.github.io/categories/Quantitative/"/>
+    
+    
+      <category term="Quantitative" scheme="http://hfutseld.github.io/tags/Quantitative/"/>
+    
+  </entry>
   
   <entry>
     <title>存储器层次结构</title>
