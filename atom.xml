@@ -82,6 +82,52 @@
   </entry>
   
   <entry>
+    <title>静态库和动态库</title>
+    <link href="http://hfutseld.github.io/2018/03/12/%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/"/>
+    <id>http://hfutseld.github.io/2018/03/12/静态库和动态库/</id>
+    <published>2018-03-11T16:15:20.000Z</published>
+    <updated>2018-09-23T13:31:43.533Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="库"><a href="#库" class="headerlink" title="库"></a>库</h2><p>库是写好的，可以复用的代码，本质上来说库是一种可执行代码的二进制文件，可以被操作系统载入内存执行。库有两种：静态库（.a.lib）和动态库（.so.dll），所谓静态、动态是指链接步骤中方式不同。</p>
+<h2 id="静态库"><a href="#静态库" class="headerlink" title="静态库"></a>静态库</h2><p>在链接阶段，会将汇编生成的目标文件.o与引用到的库一起链接打包到可执行文件中。因此对应的链接方式称为静态链接。</p>
+<p>静态库与汇编生成的目标文件一起链接为可执行文件，那么静态库必定跟.o文件格式相似。其实一个静态库可以简单看成是一组目标文件的集合，即很多目标文件经过压缩打包后形成的一个文件。</p>
+<p>静态库的特点：</p>
+<ul>
+<li>静态库对函数库的链接是放在编译时期（是指整个编译时期，不是编译过程中的那个将.i编译成.s文件的步骤）完成的。</li>
+<li>程序在运行时与静态库库再无瓜葛，移植方便。</li>
+<li>浪费空间和资源，通过静态链接产生可执行程序时，会复制所依赖的静态库中所有数据和代码到该可执行程序中。</li>
+<li>更新困难，当程序所依赖的静态库有任何更新，整个程序需要重新链接。</li>
+</ul>
+<h2 id="动态库"><a href="#动态库" class="headerlink" title="动态库"></a>动态库</h2><p>动态库在程序编译时并不会被链接到目标代码中，而是在程序运行时才被载入。不同的应用程序如果调用相同的库，那么在内存中只需要有一份该共享库的是实例，避免了空间浪费。也解决了静态库对程序的更新、部署和发布所带来的全量更新的问题。</p>
+<p>动态库的特点：</p>
+<ul>
+<li>动态库把一些库函数的链接载入推迟到程序运行的时期。</li>
+<li>动态库也称为共享库，可以实现进程之间的资源共享。</li>
+<li>程序不需要全量更新。</li>
+<li>程序可以显示调用相应的动态库。</li>
+</ul>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>静态库的使用需要：</p>
+<ul>
+<li>一个相应的头文件告知编译器静态库文件里的内容</li>
+<li>设置静态库文件允许编译器去查找已经编译好的二进制代码</li>
+</ul>
+<p>动态库的使用需要：<br>程序运行时需要显示加载动态库</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;库&quot;&gt;&lt;a href=&quot;#库&quot; class=&quot;headerlink&quot; title=&quot;库&quot;&gt;&lt;/a&gt;库&lt;/h2&gt;&lt;p&gt;库是写好的，可以复用的代码，本质上来说库是一种可执行代码的二进制文件，可以被操作系统载入内存执行。库有两种：静态库（.a.lib）和动态库（.so.
+    
+    </summary>
+    
+      <category term="CPP" scheme="http://hfutseld.github.io/categories/CPP/"/>
+    
+    
+      <category term="库" scheme="http://hfutseld.github.io/tags/%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
     <title>存储器层次结构</title>
     <link href="http://hfutseld.github.io/2017/05/18/MemoryHierarchy/"/>
     <id>http://hfutseld.github.io/2017/05/18/MemoryHierarchy/</id>
